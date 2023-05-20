@@ -1,0 +1,233 @@
+{{>header}}
+<style type="text/css">
+	.product
+	{
+		border: 1px solid #E4E4E4;
+	    margin: 1em 0em;
+	    border-radius: 5px;
+	    padding: 1em;
+	    box-shadow: 3px 5px 10px #EAEAEA;
+      background: white
+	}
+	.product a img {
+	    margin: auto;
+	    display: block;
+	    object-fit: contain;
+	}
+	h3
+	{
+		    text-transform: capitalize;
+	}
+	h5
+	{
+		    margin-bottom: 0px;
+	}
+  .caps
+  {
+    text-transform: capitalize;
+  }
+  .not
+  {
+    background: red;
+  }
+  .oldVersion
+  {
+    background: #855;
+  }
+  .oldTest
+  {
+    background: #DD4;
+  }
+  .good
+  {
+    background: #DFD;
+  }
+	.productMajor
+	{
+		position: fixed;
+	    height: 500px;
+	    width: 800px;
+	    background: white;
+	    top: calc(50% - 250px);
+	    left: calc(50% - 400px);
+	    box-shadow: 10px 10px 10px #999;
+	    border: 1px solid #DDD;
+	    border-radius: 4px;
+	    padding:50px;
+	}
+	.popupback
+	{
+		background: rgba(0,0,0,.15);
+	    position: fixed;
+	    top: 0px;
+	    left: 0px;
+	    width: 100%;
+	    height: 100%;
+          z-index: 100;
+	}
+	.modal-close
+	{
+		    position: absolute;
+		    top: 0px;
+		    right: 5px;
+		    z-index: 1055;
+		    font-weight: 900;
+		    cursor: pointer;
+	}
+	.datahidden
+	{
+		display: none;
+	}
+</style>
+<div class="container" style="margin-top:2em"></div>
+<div class="container">
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input id="searchbox" type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button id="searchbtn" class="btn btn-raised btn-primary" type="button">Search</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+    <!-- Example row of columns -->
+ 
+    <br>
+    <div class="row">
+    	{{#products}}
+    		<div class="col-md-3">
+    			<a href="/products/{{uuid}}/">
+          <div class="product" >
+	    			
+    				<a href="/products/{{uuid}}/" > <img style="    height: 150px;max-width: 230px;" src="/products/{{uuid}}/logo" ><br>
+    				<h3> {{productName}} {{productVersion}}</h3>
+    				</a>
+    				<h5 class="caps">by {{companyName}} </h5>
+    				
+    			</div></a>
+    		</div>
+    	{{/products}}
+    </div>
+   	
+    <hr>
+    <div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{{>pageination}}
+    <div class="popupback" style="display:none">
+    	<div class=" modal-dialog" style="top:calc(50% - 200px)" >
+    		<div class ="modal-close">X</div>
+    		<div class ="modal-content" >
+    		<div class ="modal-body" >
+    		<div class="" >
+    		
+    		   <div class="row">
+    		   		<div class = "col-md-5">
+    		   			<img id="splash" style="     object-fit: contain;  height: 250px;max-width: 250px;" src="/products/{{uuid}}/logo" >
+    		   		</div>
+    		   		<div class = "col-md-7">
+    		   			<div style="margin-left:20px">
+	    					<h2 id="productName"> {{productName}} </h2>
+	    					<h5 class="caps" id="companyName"> by {{companyName}} </h5>
+	    					<hr>
+	    					<h5> Homepage: <a id="website" href="{{website}}">{{website}}</a> </h5>
+	    					<h5> Contact Name: <span id="contactName" >{{contactName}}</span> </h5>
+	    					<h5> Contact Email: <a id="contactEmail" href="mailto:{{contactEmail}}">{{contactEmail}}</a> </h5>
+	    					<h5> Contact Phone: <span id="contactPhone" >{{contactPhone}}</span> </h5>
+	    				</div>	
+    		   		</div>
+    		   </div>
+    		   <div class="row" >
+           <hr>
+    		   		<div class = "col-md-12" id="conformancesection">
+                <span id="conformance"> This LRS is Experience API (xAPI) Specification Version 1.0.3 Conformant </span>
+                <br>
+                <a id="loglink" href=""> Click here to see the test logs. </a> <br>
+                <a id="certlink" href=""> Click here to dowload the conformance certificate. </a> 
+    		   		</div>
+    		   </div>
+    				
+    		
+    		</div>
+    		</div>
+    		</div>
+    	</div>
+
+    </div>
+
+     {{>footer}}
+</div>
+<script type="text/javascript">
+
+    $("#searchbtn").click(function(e){
+
+        if(!$("#searchbox").val()) 
+            window.location = "/products/all/0";
+        else  
+        {
+            var search = encodeURIComponent( $("#searchbox").val())
+            window.location = "/products/search/" + search + "/0";
+        }
+        e.preventDefault();
+    })  
+    $("#searchbox").keypress(function(e){
+        if(e.keyCode == 13)
+        {
+            if(!$("#searchbox").val()) 
+                window.location = "/products/all/0";
+            else  {
+                 var search = encodeURIComponent( $("#searchbox").val())
+                 window.location = "/products/search/" + search + "/0";
+            }
+                
+            e.preventDefault();  
+        }
+    })  
+  	$(".modal-close").click(function(){
+
+  		$(".popupback").hide();
+
+  	})
+
+    /*
+  	$(".product").click(function(e){
+
+  		$(".popupback").show();
+  		e.preventDefault();
+  		var data = $(this).children(".datahidden").text();
+  		data = JSON.parse(data);
+  		$("#productName").text(data.productName);
+  		$("#website").text(data.website);
+  		$("#website").prop("href",data.website);
+  		$("#contactName").text(data.contactName);
+  		$("#contactEmail").text(data.contactEmail);
+  		$("#contactPhone").text(data.contactPhone);
+  		$("#companyName").text("by " + data.companyName);
+  		$("#productName").text(data.productName);
+      $("#conformance").text(data.conformanceString);
+      $("#loglink").prop("href","/tests/"+data.associatedResult+"/status");
+      $("#certlink").prop("href","/products/"+data.uuid+"/certificate/");
+
+  		$("#splash").prop('src',"/products/" + data.uuid +"/logo");
+      $("#conformancesection").attr("class","col-md-12 " + data.conformanceStatus);
+  		
+  	})*/
+
+
+</script>

@@ -1,0 +1,41 @@
+{
+	"title": "Configure Test",
+	"submitText": "Start Test",
+	"fields": [
+	{
+		"label": "Test Name",
+		"id": "testname",
+		"helptext": "A name you can use to identify this result later.",
+		"validation":"val !== undefined && val !== ''",
+		"validationMessage" :"Enter a name",
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+
+	{
+		"label": "Choose LRS",
+		"id": "testConfigID",
+		"helptext": "Choose the LRS to use for this test",
+		"type":
+		{
+			"isSelect": true
+		},
+		"options": [
+		]
+	},
+	{
+		"label": "Requirement Area",
+		"id": "grep",
+		"helptext": "You can choose all requirements, or only a certain one",
+		"type":
+		{
+			"isCheckboxTree": true
+		},
+		"multiple": true,
+		"options": {}
+	}
+	]
+}

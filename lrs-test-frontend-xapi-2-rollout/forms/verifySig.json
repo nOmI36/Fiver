@@ -1,0 +1,35 @@
+{
+	"title": "Upload a Conformance Certificate",
+	"submitText": "Upload",
+	"fields": [
+		
+	
+	{
+		"label": "Certificate File",
+		"id": "cert",
+		"helptext": "Choose a Conformance Certificate file (*.jwt).",
+		"type":
+		{
+			"isFile": true
+			
+		},
+		"accept":".jwt",
+		"maxsize":"25000"
+	},
+	{
+		"type":{
+			"isLabel": true
+			
+		},
+		"helptext":" You can list  your conformant LRS as a product by uploading a valid and complete certificate issued by the <a href='https://lrstest.adlnet.gov'>ADL LRS Test Suite</a>.  Click “Choose File” and upload your JWT file to get listed."
+	},
+	{
+	"type":{
+			"isLabel": true
+			
+		},
+		"helptext":" "
+	}
+
+]
+}

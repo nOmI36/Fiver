@@ -1,0 +1,18 @@
+{
+	"title": "Upload Product Logo",
+	"submitText": "Upload",
+	"fields": [
+	{
+		"label": "Logo File",
+		"id": "logo",
+		"helptext": "Choose an image file, less than 1 megabyte in size.",
+		"type":
+		{
+			"isFile": true
+			
+		},
+		"accept":"image/*",
+		"maxsize":"250000"
+	}
+]
+}

@@ -1,0 +1,81 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+{{>header}}
+<style type="text/css">
+    .col-md-3
+    {
+        font-weight: bolder;
+        font-size: 1.2em;
+        
+    }
+    .productrow
+    {
+        vertical-align: middle;
+        text-align: center;
+    }
+    .key
+    {
+        background: #CCC;
+        padding:2em 0em;
+    }
+</style>
+<div class="container" style="margin-top:2em"></div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class='row'>
+    <a href = "/lrsconfigs/create" ><button type="button" class="btn btn-primary btn-raised">New Configuration</button></a>
+    </div>
+    <br>
+
+    <div class='row productrow key'>
+        <div class='col-md-3'>
+            Name
+        </div>
+        <div class='col-md-3'>
+            Endpoint
+        </div>  
+        <div class='col-md-3'>
+            Authorization Type
+        </div>
+        <div class='col-md-3'>
+            Actions
+        </div>
+    </div>
+    <hr>
+    {{#lrsconfigs}}
+    <div class='row productrow'>
+        <div class='col-md-3'>
+            {{name}}
+        </div>
+        <div class='col-md-3'>
+            {{endpoint}}
+        </div>  
+        <div class='col-md-3'>
+            {{authType}}
+        </div>
+        <div class='col-md-3'>
+            <a  href="/lrsconfigs/{{uuid}}/run"><button type="button" class="btn btn-primary btn-raised">Run</button></a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-raised dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage LRS Config <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class='visible-lg ' ><a href="/lrsconfigs/{{uuid}}/update">Edit</a></li>
+                            <li class='visible-lg ' ><a href="/lrsconfigs/{{uuid}}/delete">Delete</a></li>
+                          
+                        </ul>
+
+                    </div>
+        </div>
+    </div>
+    <hr>
+    {{/lrsconfigs}}
+
+   
+     {{>footer}}
+</div>
+<script type="text/javascript">
+
+
+
+</script>
+<!-- /container -->

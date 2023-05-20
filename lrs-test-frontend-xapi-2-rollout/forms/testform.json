@@ -1,0 +1,221 @@
+{
+	"title": "Form Test",
+	"submitText":"test form submit",
+	"fields": [
+	{
+		"label": "Email",
+		"id": "Email",
+		"helptext": "help for email text",
+		"type":
+		{
+			"isText": true,
+			"type": "email"
+		}
+	},
+	{
+		"label": "Password",
+		"id": "Password",
+		"helptext": "help for email password",
+		"type":
+		{
+			"isText": true,
+			"type": "password"
+		}
+	},
+	{
+		"label": "Prepend",
+		"id": "Prepend",
+		"prepend": "@rob",
+		"default":"asdasdfasdfdsasdf",
+		"helptext": "help for email text",
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Postpend",
+		"id": "Postpend",
+		"postpend": "@rob",
+		"helptext": "help for email text",
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Check",
+		"id": "Check",
+		"helptext": "help for email check",
+		"type":
+		{
+			"isCheck": true
+		}
+	},
+	{
+		"label": "MulitCheck",
+		"id": "MulitCheck",
+		"helptext": "help for MulitCheck",
+		"type":
+		{
+			"isMultiCheck": true
+		},
+		"options":[
+			{
+				"id":"AaSDF",
+				"text": "check1"
+			},
+			{
+				"id":"ASDF",
+				"text": "check2"
+			}
+		]
+	},
+	{
+		"label": "MulitCheck",
+		"id": "MulitCheckInline",
+		"inline":true,
+		"helptext": "help for MulitCheck",
+		"type":
+		{
+			"isMultiCheck": true
+		},
+		"options":[
+			{
+				"id":"ASDF",
+				"text": "check1"
+			},
+			{
+				"id":"ASD2F",
+				"text": "check2"
+			}
+		]
+	},
+	{
+		"label": "Label",
+		"id": "Label",
+		"helptext": "help for email label",
+		"type":
+		{
+			"isLabel": true
+		}
+	},
+	{
+		"label": "Spinner",
+		"id": "spinner",
+		"helptext": "help for the spinner",
+		"type":
+		{
+			"isSpinner": true
+		},
+		"default":100
+	},
+	{
+		"label": "Tags",
+		"id": "tags",
+		"helptext": "help for tags label",
+		"type":
+		{
+			"isTags": true
+		},
+		"default":"this,is,awsome!"
+	},
+	{
+		"label": "Slider",
+		"id": "slider",
+		"helptext": "help for a slider",
+		"type":
+		{
+			"isSlider": true
+		},
+		"min":0,
+		"max":100,
+		"step":1
+	},
+	{
+		"label": "Select",
+		"id": "Select",
+		"helptext": "help for email select",
+		"type":
+		{
+			"isSelect": true
+		},
+		"options": [
+		{
+			"text": "Option 1",
+			"value": 1
+		},
+		{
+			"text": "Option 2",
+			"value": 2
+		} ]
+	},
+	{
+		"label": "TextArea",
+		"id": "TextArea",
+		"helptext": "help for text area",
+		"type":
+		{
+			"isTextArea": true
+		}
+	},
+	{
+		"label": "SelectMulti",
+		"id": "SelectMulti",
+		"helptext": "help for email multiselect",
+		"type":
+		{
+			"isSelect": true
+		},
+		"multiple": true,
+		"options": [
+		{
+			"text": "Option 1",
+			"value": 1
+		},
+		{
+			"text": "Option 2",
+			"value": 2
+		} ]
+	},
+	{
+		"label": "Radios",
+		"id": "Radios",
+		"helptext": "help for email radios",
+		"type":
+		{
+			"isRadio": true
+		},
+		"options": [
+		{
+			"text": "Radio 1",
+			"value": 1
+		},
+		{
+			"text": "Radio 2",
+			"value": 2
+		} ]
+	},
+	{
+		"label": "InlineRadios",
+		"id": "InlineRadios",
+		"helptext": "help for email radios",
+		"inline":true,
+		"type":
+		{
+			"isRadio": true
+		},
+		"options": [
+		{
+			"text": "Radio 1",
+			"value": 1
+		},
+		{
+			"text": "Radio 2",
+			"value": 2
+		} ]
+	}
+	]
+}

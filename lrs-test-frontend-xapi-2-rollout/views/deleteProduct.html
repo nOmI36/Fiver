@@ -1,0 +1,112 @@
+{{>header}}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="container" style="margin-top:3em">
+    <!-- Example row of columns -->
+    <div class='row' >
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h2 class="text-center">Delete Product {{product.productName}} {{product.productVersion}} by {{product.companyName}} </h2>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class='row' >
+        <div class="col-md-4"></div>
+        <div class="col-md-4 formpanel">
+            
+            <form onsubmit="return false;"  class="form-signin">
+                <div class="form-group">
+                    <label for="pwd">Are you absolutly sure?</label>
+
+                    <input id="csrf" type="hidden" value="{{csrfToken}}"/>
+
+                    <input id="confirm" name= 'pwd' type="text" class='form-control' placeholder="Yes or no"></input>
+                </div>
+            </form>
+            <button id='submit' class="btn btn-raised btn-danger btn-lg btn-block" href="#" role="button">Delete Product</button>
+            <a href="#"  onclick="history.back();" >&laquo;Cancel</a>
+            <div id="feedback" class="hidden alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span> <span role="message">Enter a valid email address</span>
+            </div>
+           
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class='row'>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {{>footer}}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+<!-- /container -->
+<script type="text/javaScript">
+
+function getQueryVariable(variable){
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++)
+    {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable)
+        {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}
+ $("input").focus(function(){
+
+    $('#feedback').addClass('hidden');
+
+ })
+ $("input").keypress(function(k)
+    {
+        if(k.keyCode == 13)
+        {
+           if(this == $("input").last()[0])
+           {
+                $("#submit").click();
+           }     
+        }
+    })
+ 
+    $('#submit').click(function()
+    {
+        $('#feedback').addClass('hidden');
+
+
+        if ($("#confirm").val().toLowerCase().trim() != "yes")
+        {
+            $('#feedback').removeClass('hidden');
+            $('#feedback span[role=message]').html("Type 'Yes' in the box");
+             return;
+        }
+
+        window.setTimeout(function()
+        {
+            $.ajax("/products/{{product.uuid}}/delete/",
+            {
+                type: "POST",
+                data: {
+                    _csrf: $("#csrf").val()
+                },
+                success: function(res)
+                {
+                    $('#feedback').removeClass('hidden');
+                    $('#feedback span[role=message]').text("ok");
+                    window.setTimeout(function(){
+                        window.location = "/";
+                    })
+                },
+            }).fail(function(xhr)
+            {
+                $('#feedback').removeClass('hidden');
+                $('#feedback span[role=message]').html(xhr.responseText);
+            })
+        }, 100)
+    })
+
+</script>

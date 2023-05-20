@@ -1,0 +1,131 @@
+{{>header}}
+<script src='/static/scripts/jquery.details.min.js'></script>
+<style type="text/css">
+
+	.bulletpoint::before {
+		content: '\2022';
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	.suite-item {
+		font-size: 16px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.suite-item > .suite-item {
+		margin-left: 20px;
+	}
+	.suite-item-leaf {
+		/* font-size: 12px; */
+	}
+	.failed {
+		/*font-weight: bold;*/
+		color: darkred;
+	}
+	.passed {
+		color: darkgreen;
+	}
+	.cancelled {
+		color: grey;
+	}
+	.errorMsg {
+		color: black;
+		font-weight: normal;
+		font-style: italic;
+	}
+ 
+</style>
+
+
+<div class='row adlHeaderColor'>
+</div>
+<div class='row adlHeader'>
+    <div class="col-md-12">
+        <h2 class="text-center">Test Status</h2>
+    </div>
+</div>
+
+<div class="container">
+
+
+{{#owned}}
+	<!-- Single button -->
+	<div class="btn-group">
+		<button type="button" class="btn btn-raised btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Manage Test Results <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			<li><a id="test_cancel" {{^running}} style="pointer-events:none;color:lightgray" {{/running}} href="/tests/{{test.uuid}}/cancel">Cancel Test</a></li>
+			<li><a id="test_delete"{{#running}} style="pointer-events:none;color:lightgray" {{/running}} href="/tests/{{test.uuid}}/delete">Delete Record</a></li>
+			<li><a id="test_download"{{#running}} style="pointer-events:none;color:lightgray" {{/running}} href="/tests/{{test.uuid}}/fullLog">Download Log</a></li>
+			<li><a id="test_rerun"{{#running}} style="pointer-events:none;color:lightgray" {{/running}} href="/tests/{{test.uuid}}/rerun">Rerun Test</a></li>
+			
+		</ul>
+	</div>
+{{/owned}}
+
+</div>
+<div id = "templateRoot">
+<!-- the client side templating happens here. we will yeild on the server for the intial render pass, so the user does not have to ajax  right away -->
+{{>testStatus}}
+</div>
+<script>
+
+	$('details').details();
+    $('.retest').each(function(e,i){
+
+        var name = $(this).attr('name');
+        var uuid = $(this).attr('uuid');
+        var string = encodeURIComponent(JSON.stringify({grep:name,testConfigID:uuid}));
+        var href = "/tests/new/?defaults=" + string;
+        $(this).attr('href',href);
+    })
+	var lastHash = null;
+	function drawTemplate()
+	{
+		$.get('/tests/{{testRunnerID}}/status/json', function(data, textStatus, xhr)
+		{
+			// preserve tab expansion
+			var openState = [];
+			$('#templateRoot').find("details").each(function(i, elem){
+				openState.push( !!elem.open );
+			});
+
+			// replace old status with new
+			$('#templateRoot').html(data);
+
+			// reapply tab expansion
+			$('#templateRoot').find("details").each(function(i, elem){
+				if(openState[i])
+					elem.open = true;
+			});
+
+			var status = $('#test_status').text();
+			if(status == "queued" || status=="started")
+				setTimeout(drawTemplate, 3000);
+			else if(status=="finished")
+			{
+				$("#test_cancel").attr('style',"color:lightgray;pointer-events:none")
+				$("#test_delete").attr('style',"")
+				$("#test_download").attr('style',"")
+				$("#test_rerun").attr('style',"")
+			}
+
+			$('.retest').each(function(e,i){
+
+		        var name = $(this).attr('name');
+		        var uuid = $(this).attr('uuid');
+		        var string = encodeURIComponent(JSON.stringify({grep:name,testConfigID:uuid}));
+		        var href = "/tests/new/?defaults=" + string;
+		        $(this).attr('href',href);
+		    })
+
+
+		}, 'html');
+	}
+	{{#running}}
+	setTimeout(drawTemplate, 3000);
+	{{/running}}
+
+</script>
+<div class="container" style="margin-top:0em">{{>footer}}</div>

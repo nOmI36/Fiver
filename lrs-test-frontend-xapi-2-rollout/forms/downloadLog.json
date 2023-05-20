@@ -1,0 +1,43 @@
+{
+	"title": "Download Logs",
+	"submitText": "Download",
+	"fields": [
+	{
+		"label": "Errors Only",
+		"id": "errorsOnly",
+		"helptext": "Only include the tests that produced errors in the log",
+		"type":
+		{
+			"isCheck": true
+		}
+	},
+	{
+		"label": "Include HTTP",
+		"id": "includeHTTP",
+		"helptext": "Include the full log of the HTTP traffic",
+		"type":
+		{
+			"isCheck": true
+		}
+	},
+	{
+		"label": "Log Format",
+		"id": "format",
+		"helptext": "Get a human readable log, or a machine readable version",
+		"type":
+		{
+			"isSelect": true
+		},
+		"options": [
+			{
+				"text":"JavaScript Object Notation",
+				"value":"JSON"
+			},
+			{
+				"text":"Plain Text",
+				"value":"text"
+			}
+		]
+	}
+	]
+}

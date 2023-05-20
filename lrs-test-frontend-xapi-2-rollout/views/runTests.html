@@ -1,0 +1,180 @@
+{{>header}}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="container" style="margin-top:3em">
+    <!-- Example row of columns -->
+    <div class='row' >
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h2 class="text-center">Run the Test Suite</h2>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class='row'>
+        <div class="col-md-4"></div>
+        <div class="col-md-4" style="border:1px solid #ddd;border-radius:3px;margin:2em 0em;padding:2em 2em">
+            <form class="form-signin">
+                <div class="form-group">
+                    <label>Test Name</label>
+                    <input id="testname" type="text" class='form-control' placeholder="Name"></input>
+                </div>
+                <div class="form-group">
+                    <label>LRS URL</label>
+                    <input id="LrsUrl" type="text" class='form-control' placeholder="URL"></input>
+                </div>
+                
+
+
+                 <div class="form-group">
+                    <label>Authorization Type</label>
+                    <select id="authType" class='form-control'>
+                       <option value="basic">HTTP Basic</option>
+                       <option value="OAuth">OAuth 1.0</option>
+                    </select>
+                </div>
+
+                <div id="basicConfig" style="display: block">
+                    <div class="form-group">
+                        <label>Basic Auth User</label>
+                        <input id="user" type="text" class='form-control' placeholder="username"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>Basic Auth Pass</label>
+                        <input id="pass" type="password" class='form-control' placeholder="password"></input>
+                    </div>
+                </div>
+
+                <div id="oauthConfig" style="display: none">
+                    <div class="form-group">
+                        <label>OAuth 1.0 Consumer Key</label>
+                        <input id="consumer_key" type="text" class='form-control' placeholder=""></input>
+                    </div>
+                    <div class="form-group">
+                        <label>OAuth 1.0 Consumer Secret</label>
+                        <input id="consumer_secret" type="text" class='form-control' placeholder=""></input>
+                    </div>
+                    <div class="form-group">
+                        <label>OAuth 1.0 Request Token Path</label>
+                        <input id="request_token_path" type="text" class='form-control' value="/OAuth/initiate" placeholder="endpoint+"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>OAuth 1.0 Authorization Token Path</label>
+                        <input id="auth_token_path" type="text" class='form-control' value="/OAuth/token" placeholder="endpoint+"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>OAuth 1.0 User Authorization Path</label>
+                        <input id="authorization_path" type="text" class='form-control' value="/../accounts/login?next=/XAPI/OAuth/authorize" placeholder="endpoint+"></input>
+                    </div>
+                </div>
+
+                <input id="csrf" type="hidden" name="_csrf" value="{{csrfToken}}"/>
+
+            </form>
+            <button type='' class="btn btn-lg btn-primary btn-block" href="#" role="button">Run Tests</button>
+            <div id="feedback" class="hidden alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span> <span role="message"></span>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class='row'>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {{>footer}}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+<!-- /container -->
+<script type="text/javaScript">
+
+function updateAuthGUI()
+{
+     if($('#authType').val() == "OAuth")
+    {
+        $("#oauthConfig").show();
+        $("#basicConfig").hide();
+    }
+    if($('#authType').val() == "basic")
+    {
+        $("#oauthConfig").hide();
+        $("#basicConfig").show();
+    }
+}
+function getQueryVariable(variable)
+{
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++)
+    {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable)
+        {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}
+
+var config = getQueryVariable("c");
+if(config)
+{
+    try{
+        config = JSON.parse(config);
+        $('#LrsUrl').val(config.endpoint);
+        $('#user').val(config.authUser);
+        $('#pass').val(config.authPass);
+        $('#testname').val(config.name);
+
+        $('#authType').val(config.authType);
+        
+        config.oAuthConsumerKey && $('#consumer_key').val(config.oAuthConsumerKey);
+        config.oAuthConsumerSecret && $('#consumer_secret').val(config.oAuthConsumerSecret);
+        config.request_token_path && $('#request_token_path').val(config.request_token_path);
+        config.auth_token_path && $('#auth_token_path').val(config.auth_token_path);
+        config.authorization_path && $('#authorization_path').val(config.authorization_path);
+
+        updateAuthGUI();
+    }catch(d){}
+}
+
+
+$('button').click(function()
+{
+   
+
+    $('#feedback').addClass('hidden');
+    var startTestRequest = {
+        url: $('#csrf').val(),
+        url: $('#LrsUrl').val(),
+        user: $('#user').val(),
+        password: $('#pass').val(),
+        name: $('#testname').val(),
+        authType:$('#authType').val(),
+        consumer_key:$('#consumer_key').val(),
+        consumer_secret:$('#consumer_secret').val(),
+        request_token_path:$('#request_token_path').val(),
+        auth_token_path:$('#auth_token_path').val(),
+        authorization_path:$('#authorization_path').val()
+    }
+    $.ajax("/tests/run",
+    {
+        data: JSON.stringify(startTestRequest),
+        type: "POST",
+        success: function(res)
+        {
+           
+            window.location = res;
+        },
+        contentType: 'application/json'
+    }).fail(function(xhr)
+    {
+        $('#feedback').removeClass('hidden');
+        $('#feedback span[role=message]').text(xhr.responseText);
+    })
+})
+
+$('#authType').change(function(){
+   updateAuthGUI();
+})
+</script>

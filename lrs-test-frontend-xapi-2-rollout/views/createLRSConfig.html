@@ -1,0 +1,219 @@
+{{>header}}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class='row adlHeaderColor'>
+</div>
+<div class='row adlHeader'>
+    <div class="col-md-12">
+        <h2 class="text-center">Create or Edit LRS Configuration</h2>
+    </div>
+</div>
+<div class="container" style="margin-top:0em">
+    <!-- Example row of columns -->
+    <div class='row'>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h2 class="text-center">{{title}}</h2>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class='row'>
+        <div class="col-md-2"></div>
+        <div class="col-md-8"
+            style="border:1px solid #ddd;border-radius:3px;margin:2em 0em;padding:2em 2em;background:white">
+            <form onsubmit="return false;" class="form-signin">
+                <div class="form-group">
+                    <label>Associated Product</label>
+                    <select disabled='disabled' id="associatedProduct" type="text" class='form-control'
+                        placeholder="Name" value="{{lrsconfig.associatedProduct}}">
+                        {{#products}}
+                        <option value="{{uuid}}" {{#selected}}selected="selected" {{/selected}}>{{productName}}</option>
+                        {{/products}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Configuration Name</label>
+                    <input id="name" type="text" class='form-control' placeholder="Name"
+                        value="{{lrsconfig.name}}"></input>
+                </div>
+                <div class="form-group">
+                    <label>LRS URL</label>
+                    <input id="endpoint" type="text" class='form-control' placeholder="URL"
+                        value="{{lrsconfig.endpoint}}"></input>
+                </div>
+
+                <div class="form-group">
+                    <label>Configured xAPI Version</label>
+                    <select id="xapiVersion" class='form-control'>
+                        <option value="1.0.3">1.0.3</option>
+                        <option value="2.0.0">2.0.0</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Authorization Type</label>
+                    <select id="authType" class='form-control'>
+                        <option {{#isBasic}}selected="selected" {{/isBasic}} value="basic">HTTP Basic</option>
+                        <option {{#isOAuth}}selected="selected" {{/isOAuth}} value="OAuth">OAuth 1.0</option>
+                    </select>
+                </div>
+
+                <div id="oauthConfig" style="display: none">
+                    <div class="form-group">
+                        <label>OAuth 1.0 Consumer Key</label>
+                        <input id="consumer_key" type="text" class='form-control' placeholder=""
+                            {{#lrsconfig.consumer_key}} value="{{lrsconfig.consumer_key}}"
+                            {{/lrsconfig.consumer_key}}></input>
+                    </div>
+                    <div class="form-group">
+                        <label>OAuth 1.0 Consumer Secret</label>
+                        <input id="consumer_secret" type="text" class='form-control' {{#lrsconfig.consumer_secret}}
+                            value="{{lrsconfig.consumer_secret}}" {{/lrsconfig.consumer_secret}} placeholder=""></input>
+                    </div>
+                    <div class="form-group">
+                        <label>OAuth 1.0 Request Token Path</label>
+                        <input id="request_token_path" type="text" class='form-control'
+                            {{#lrsconfig.request_token_path}} value="{{lrsconfig.request_token_path}}"
+                            {{/lrsconfig.request_token_path}} {{^lrsconfig.request_token_path}} value="/OAuth/initiate"
+                            {{/lrsconfig.request_token_path}} placeholder="endpoint+"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>OAuth 1.0 Authorization Token Path</label>
+                        <input id="auth_token_path" type="text" class='form-control' {{#lrsconfig.auth_token_path}}
+                            value="{{lrsconfig.auth_token_path}}" {{/lrsconfig.auth_token_path}}
+                            {{^lrsconfig.auth_token_path}} value="/OAuth/token" {{/lrsconfig.auth_token_path}}
+                            placeholder="endpoint+"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>OAuth 1.0 User Authorization Path</label>
+                        <input id="authorization_path" type="text" class='form-control'
+                            {{#lrsconfig.authorization_path}} value="{{lrsconfig.authorization_path}}"
+                            {{/lrsconfig.authorization_path}} {{^lrsconfig.authorization_path}}
+                            value="/../accounts/login?next=/XAPI/OAuth/authorize" {{/lrsconfig.authorization_path}}
+                            placeholder="endpoint+"></input>
+                    </div>
+                </div>
+                <div id="basicConfig" style="display: block">
+                    <div class="form-group">
+                        <label>Basic Auth User</label>
+                        <input id="authUser" type="text" class='form-control' placeholder="username"
+                            value="{{lrsconfig.authUser}}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>Basic Auth Pass</label>
+                        <input id="authPass" type="password" class='form-control' placeholder="password"
+                            value="{{lrsconfig.authPass}}"></input>
+                    </div>
+                </div>
+
+                <input id="csrf" type="hidden" name="_csrf" value="{{csrfToken}}" />
+
+            </form>
+            <button id='submit' class="btn btn-lg btn-primary btn-raised btn-block" href="#"
+                role="button">{{pageTitle}}</button>
+            <a href="#" onclick="history.back();">&laquo;Cancel</a>
+            <div id="feedback" class="hidden alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span> <span role="message"></span>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class='row'>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {{>footer}}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+<!-- /container -->
+<script type="text/javaScript">
+
+    function updateVersionGUI() {
+        var mainVersion = "{{lrsconfig.mainVersion}}";
+        var xapiVersion = "{{lrsconfig.xapiVersion}}";
+        if (xapiVersion == "" || xapiVersion == null) {
+            xapiVersion = mainVersion;
+        }
+
+        $('#xapiVersion').val(xapiVersion);
+    }
+
+    function updateAuthGUI() {
+        if($('#authType').val() == "OAuth")
+        {
+            $("#oauthConfig").show();
+            $("#basicConfig").hide();
+        }
+        if($('#authType').val() == "basic")
+        {
+            $("#oauthConfig").hide();
+            $("#basicConfig").show();
+        }
+    }
+    $("input").focus(function(){
+
+        $('#feedback').addClass('hidden');
+
+    })
+    $("input").keypress(function(k)
+        {
+            if(k.keyCode == 13)
+            {
+            if(this == $("input").last()[0])
+            {
+                    $("#submit").click();
+            }     
+            }
+        })
+
+    $('#submit').click(function()
+    {
+        $('#feedback').addClass('hidden');
+        var lrsConfig = {
+            _csrf: $("#csrf").val(),
+            endpoint: $('#endpoint').val(),
+            authUser: $('#authUser').val(),
+            authPass: $('#authPass').val(),
+            name: $('#name').val(),
+            authType:$('#authType').val(),
+            consumer_key:$('#consumer_key').val(),
+            consumer_secret:$('#consumer_secret').val(),
+            request_token_path:$('#request_token_path').val(),
+            auth_token_path:$('#auth_token_path').val(),
+            authorization_path:$('#authorization_path').val(),
+            associatedProduct:$("#associatedProduct").val(),
+            xapiVersion: $("#xapiVersion").val()
+        }
+        if(lrsConfig.endpoint.indexOf("lrs.adlnet.gov") !== -1)
+        {
+            $('#feedback').removeClass('hidden');
+            $('#feedback span[role=message]').text("Please don't test against the ADL Public Test LRS");
+            return;
+        }
+        
+        $.ajax(window.location.path,
+        {
+            data: JSON.stringify(lrsConfig),
+            type: "POST",
+            success: function(res)
+            {
+                window.location = "/products/"+$("#associatedProduct").val()+"/";
+            },
+            contentType: 'application/json'
+        }).fail(function(xhr)
+        {
+            $('#feedback').removeClass('hidden');
+            $('#feedback span[role=message]').text(xhr.responseText);
+        })
+    })
+
+    $('#authType').change(function(){
+        updateAuthGUI();
+    })
+
+
+    updateVersionGUI();
+    updateAuthGUI();
+
+</script>

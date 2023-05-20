@@ -1,0 +1,30 @@
+{{>header}}
+
+<script src='/static/scripts/sign.js'></script>
+<link rel='stylesheet' href='/static/css/sign.css'/>
+
+<div class='container'>
+	<h1>Testing Signatures</h1>
+
+	<form method='POST' onsubmit='return sendAjax(event);'>
+		<textarea id='message' name='message' class='code'>{
+	"asdf": [1,2,true,3.14],
+	"nest": {
+		"testing": []
+	}
+}</textarea>
+		<br/>
+		<input type='submit'>
+	</form>
+
+	<h2>Raw result</h2>
+	<div class='binary' id='raw'></div>
+	<h2>Header</h2>
+	<div class='code' id='header'></div>
+	<h2>Payload</h2>
+	<div class='code' id='payload'></div>
+	<h2>Signature</h2>
+	<div class='binary' id='signature'></div>
+</div>
+
+{{>footer}}

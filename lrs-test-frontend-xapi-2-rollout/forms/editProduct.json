@@ -1,0 +1,95 @@
+{
+	"title": "New Product",
+	"submitText": "Create New Product",
+	"fields": [
+	{
+		"label": "",
+		"id": "disclamer",
+		"helptext": "The information you list on this page will be publically displayed. Don't enter anything you would prefer to keep private",
+		"type":
+		{
+			"isLabel": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Company Name",
+		"id": "companyName",
+		"helptext": "The name of the company or organization that manages the product",
+		"validation":"val !== undefined && val !== ''",
+		"validationMessage" :"Enter a Company Name",
+		"disabled":true,
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Product Name",
+		"id": "productName",
+		"helptext": "The name of the product",
+		"validation":"val !== undefined && val !== ''",
+		"validationMessage" :"Enter a Product Name",
+		"disabled":true,
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Product Version",
+		"id": "productVersion",
+		"helptext": "A version number to help users identify their exact version of the product",
+		"disabled":true,
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Homepage",
+		"id": "website",
+		"helptext": "A website for the product",
+		"placeholder":"http://",
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Contact Name",
+		"id": "contactName",
+		"helptext": "An name of a contact person at the company or organization that manages the product",
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Contact Email",
+		"id": "contactEmail",
+		"helptext": "The email for the contact person",
+		"validation":"val !== undefined && val !== '' && val.indexOf('@') !== -1",
+		"validationMessage" :"Enter a valid email address",
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	},
+	{
+		"label": "Contact Phone",
+		"id": "contactPhone",
+		"helptext": "The phone number for the contact person. ",
+		"type":
+		{
+			"isText": true,
+			"type": "text"
+		}
+	}]
+}

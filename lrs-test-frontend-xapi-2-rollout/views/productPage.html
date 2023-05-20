@@ -1,0 +1,495 @@
+{{>header}}
+<style type="text/css">
+.confrow {
+    font-size: 2em;
+}
+
+.header {
+    width: 7em;
+    display: inline-block;
+}
+
+.data {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 30em;
+    display: inline-block;
+    text-overflow: ellipsis;
+    vertical-align: bottom
+}
+</style>
+<style type="text/css">
+.product {
+    border: 1px solid #E4E4E4;
+    margin: 1em 0em;
+    border-radius: 5px;
+    padding: 1em;
+    box-shadow: 3px 5px 10px #EAEAEA;
+}
+
+.product a img {
+    margin: auto;
+    display: block;
+    object-fit: contain;
+}
+
+h3 {
+    text-transform: capitalize;
+}
+
+h5 {
+    margin-bottom: 0px;
+}
+
+.caps {
+    text-transform: capitalize;
+}
+
+.not {
+    background: red;
+}
+
+.oldVersion {
+    background: #855;
+}
+
+.oldTest {
+    background: #DD4;
+}
+
+.good {
+    background: #DFD;
+}
+
+.productMajor {
+    position: fixed;
+    height: 500px;
+    width: 800px;
+    background: white;
+    top: calc(50% - 250px);
+    left: calc(50% - 400px);
+    box-shadow: 10px 10px 10px #999;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    padding: 50px;
+}
+
+.popupback {
+    background: rgba(0, 0, 0, .15);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    z-index: 1055;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.datahidden {
+    display: none;
+}
+
+.configs {
+    font-size: 9px;
+    margin-top: 3em;
+}
+
+.productrow .configlabel {
+    margin: .2em 0em;
+    text-align: center;
+    overflow: hidden;
+}
+
+.modal-content {
+        box-shadow: none;
+    background: hsla(193, 10%, 97%, 1);
+ 
+}
+
+.rowFirst
+{
+    text-align:left;
+}
+.rowLast
+{
+    text-align:left;
+}
+.rowCenter
+{
+    text-align:left;
+}
+.rowCenter div {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.rightBtn
+{
+    float:none;
+    text-align: left
+}
+@media screen and (min-width: 992px) {
+   .rightBtn
+    {
+        float:right;
+        text-align: right
+    }
+    .rowLast
+    {
+        text-align:right;
+    }
+    .rowCenter
+    {
+        text-align:center;
+    }
+}
+.cell
+{
+   
+    line-height: 56px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+   
+}
+.cell .progress
+{
+    margin-top: -17px;
+}
+hr
+{
+        border-bottom: 1px solid #DDD;
+}
+.hideOverflow
+{
+    overflow:hidden;
+}
+
+.glyphicon-question-sign{
+  color: #32abc4;
+  font-size: 60%;
+}
+
+.glyphicon-question-sign:active{
+  color: #003466;
+}
+
+.g2x{
+  font-size: 120%;
+}
+
+.popover{
+  background-color: #003466;
+}
+
+</style>
+
+
+<div class='row adlHeaderColor'>
+</div>
+<div class='row adlHeader'>
+    <div class="col-md-12">
+        <h2 class="text-center">Product Dashboard</h2>
+    </div>
+</div>
+
+
+<div class='container'>
+    <br> 
+    <ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  {{#conformanceResult}}<li>Products</li>{{/conformanceResult}}
+  <li class="active">{{product.productName}} {{product.productVersion}} by {{product.companyName}}</li>
+</ol>
+   
+    <div class="modal-content">
+        <div class="modal-body">
+            <div>{{#owned}}<a href="/products/{{product.uuid}}/edit/">
+                <span class="glyphicon glyphicon-pencil rightBtn" style="font-size: 2em"></span>
+                </a>
+            {{/owned}}</div>
+            <div class="">
+                <div class="row confrow">
+                    <div class="col-md-5">
+                        <img id="splash" style="     object-fit: contain;  height: 250px;max-width: 250px;" src="/products/{{product.uuid}}/logo">
+                    </div>
+                    <div class="col-md-7">
+                        <div style="margin-left:20px">
+                            <h2 id="productName">{{product.productName}} {{product.productVersion}}</h2>
+                            <h5 class="caps" id="companyName">by {{product.companyName}}</h5>
+                            <hr>
+                            <h5> Homepage: <a id="website" target="_blank" href="{{product.website}}">{{product.website}}</a> </h5>
+                            <h5> Contact Name: <span id="contactName">{{product.contactName}}</span> </h5>
+                            <h5> Contact Email: <a id="contactEmail" target="_blank" href="mailto:{{product.contactEmail}}">{{product.contactEmail}}</a> </h5>
+                            <h5> Contact Phone: <span id="contactPhone">{{product.contactPhone}}</span> </h5>
+                        </div>
+                    </div>
+                </div>
+                {{#conformanceResult}}  
+                <div class="row confrow">
+                    <br>
+                    <div class="col-md-12 {{conformance.status}}" id="conformancesection">
+                        <span id="conformance">{{conformance.string}}</span>
+                        <br>
+                        {{^owned}} 
+                            <a href="/tests/{{conformanceResult.uuid}}/status"> View the full log </a>
+                        {{/owned}}
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    
+                </div>
+                 {{>disclaimer}}
+                {{/conformanceResult}}
+                {{#owned}}
+                <div>
+                    <a href="/products/{{product.uuid}}/setLogo/">
+                        <button type="button" class="btn btn-primary btn-raised">Set Logo</button>
+                    </a>
+                        
+                    <a href="/products/{{product.uuid}}/delete/"  class = "rightBtn">
+                        <button type="button" {{#inProgress}}disabled="disabled" style="background:#CCC" {{/inProgress}} class="btn btn-danger btn-raised">Delete Product</button>
+                    </a>
+                </div>
+                {{/owned}}
+                <div class="row">
+                  <span class="glyphicon glyphicon-question-sign rightBtn g2x" data-toggle="popover" data-trigger="hover focus" data-placement="top" data-content= "The test result associated with this product shows that it is conformant to the current version of xAPI"></span>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+    {{#owned}}
+
+    {{#inProgress}}
+    <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>In Progress!</strong> There is a test in progress for this product. <a href="/tests/{{uuid}}/status" >Click here to view.</a> 
+    </div>
+    {{/inProgress}}
+
+    {{#conformanceResult}}
+        <div class="row confrow">
+            <div class="col-md-6"> <h2 class=''>Conformance Claims </h2> </div>
+            
+            <div class="col-md-6">
+            <span class="rightBtn"> 
+                <a href = "/products/{{testOfProductUUID}}/associate/null/" >
+                    <button type="button" class="btn btn-primary btn-raised">Clear Conformance Evidence</button>
+                </a>
+                <a href="/products/{{testOfProductUUID}}/certificate/">
+                    <button type="button" class="btn btn-primary btn-raised">Download Certificate</button>
+                </a>
+            </span>
+            </div>
+        </div>
+        <hr>
+     
+  
+        <div class="configs">
+            <div class='row productrow confrow'>
+                <div class='col-md-3 rowFirst' >
+                    <div>{{name}}</div>
+                </div>
+                <div class='col-md-3 rowCenter'>
+                    <div>{{flags.endpoint}}</div>
+                </div>
+                <div class='col-md-3 rowCenter'>
+                    <div>{{#formatTimestamp}}{{startTime}}{{/formatTimestamp}}</div>
+                </div>
+                <div class='col-md-3 rowLast'>
+                    <div>{{summary.version}}</div>
+                </div>
+            </div>
+        </div>    
+
+
+    {{/conformanceResult}}
+    {{^conformanceResult}}
+         {{#results.length}}
+                    {{#configs.length}}
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>No Conformance!</strong> Choose "Request Certificate" for a passing, complete test log as evidence for conformance. 
+                        </div>
+                    {{/configs.length}}
+        {{/results.length}}
+    {{/conformanceResult}}
+
+        <div class="row confrow" style="margin-top:50px">
+        <div class="col-md-6"> <h2 class=''>LRS Configurations</h2> </div>
+        <div class="col-md-6">
+        <span class="rightBtn"> 
+            <a href = '/lrsconfigs/create?defaults=%7B"associatedProduct"%3A"{{product.uuid}}"%7D' >
+                    <button type="button" class="btn btn-primary btn-raised">New Configuration</button>
+            </a>
+            <span class="glyphicon glyphicon-question-sign" font-size=60% data-toggle="popover" data-trigger="hover focus" data-placement="top" data-content= "A configuration is a group of settings related to how the test suite connects to your product. You'll need at least one configuration to test, but you may have as many as you like"></span>
+        </span>
+        </div>
+        </div>
+        <hr>
+
+        {{#configs}}
+        <div class='configs'>
+            <div class='row productrow confrow'>
+                <div class='col-md-3 rowFirst  cell'>
+                    <div>{{name}}</div>
+                </div>
+                <div class='col-md-3 rowCenter cell'>
+                    <div>{{endpoint}}</div>
+                </div>
+                <div class='col-md-2 rowCenter cell'>
+                    <div>{{authType}}</div>
+                </div>
+                <div class='col-md-4 rowLast cell'>
+                    <a href="/lrsconfigs/{{uuid}}/run">
+                        <button type="button" class="btn btn-primary btn-raised">Test</button>
+                    </a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-raised dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Options <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class=' '><a href="/lrsconfigs/{{uuid}}/update">Edit</a></li>
+                            <li class=' '><a href='/tests/new/{{product.uuid}}/?defaults=%7B"testConfigID"%3A"{{uuid}}"%7D'>Advanced Test</a></li>
+                            <hr>
+                            <li class=' '><a href="/lrsconfigs/{{uuid}}/delete">Delete</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> 
+            
+        {{/configs}}
+
+            {{^configs.length}}
+           
+            <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>No Configurations!</strong> You need an LRS Configuration before you can run tests. Click the button to the right.
+            </div>
+    
+            {{/configs.length}}
+        
+        {{#results.length}}
+            <h2 class='' style="margin-top:50px">Past Results</h2>
+            <hr>
+            <div class="configs">
+               
+                {{#results}}
+                <div class="row confrow">
+                    <div class='col-md-2 cell hideOverflow' ><a href="/tests/{{uuid}}/status">{{name}}</a></div>
+                    <div class='col-md-3 cell hideOverflow' ><a href="/tests/{{uuid}}/status">{{flags.endpoint}}</a></div>
+                    <div class='col-md-2 cell' >
+                        <span id="status_{{uuid}}" class="testStatus">{{state}}</span>
+                        <div class="progress">
+                            <div id="progress_{{uuid}}" class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div  class='col-md-5 cell rowLast'>
+                        <!-- Single button -->
+                        <div class="rightBtn" style="margin-top: -7px;margin-bottom: -7px;">
+                            {{^isAdmin}}
+                                {{^selected}} 
+                                <a href="/products/{{testOfProductUUID}}/request_associate/{{uuid}}/">
+                                    <button {{#disabled}}disabled="disabled" style="background:#CCC" {{/disabled}} type="button" class="btn btn-primary btn-raised" data-toggle="popover" data-trigger="hover focus" data-placement="top" data-delay=500 data-content= "Request that the administrator consider these results as evidence for xAPI Conformance. You'll be notified when your conformance certificate is available">Request Certificate</button>
+                                </a>
+                                {{/selected}}
+                                {{#selected}} 
+                                    <a href="/products/{{testOfProductUUID}}/associate/null/">
+                                        <button type="button" class="btn btn-danger btn-raised">Remove Certificate</button>
+                                    </a>
+                                {{/selected}}     
+                            {{/isAdmin}}
+                            {{#isAdmin}}
+                                {{^selected}} 
+                                    <a href="/products/{{testOfProductUUID}}/associate/{{uuid}}/">
+                                        <button {{#disabled}}disabled="disabled" style="background:#CCC" {{/disabled}} type="button" class="btn btn-primary btn-raised">Set Certificate</button>
+                                    </a>
+                                {{/selected}}
+                                {{#selected}} 
+                                    <a href="/products/{{testOfProductUUID}}/associate/null/">
+                                        <button type="button" class="btn btn-danger btn-raised">Remove Certificate</button>
+                                    </a>
+                                {{/selected}}     
+                            {{/isAdmin}}
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-raised dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Test Results <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/tests/{{uuid}}/status">Details</a></li>
+                                    
+                                    <li><a {{^duration}} style="pointer-events:none;color:lightgray" {{/duration}} href="/tests/{{uuid}}/rerun">Rerun Test</a></li>
+                                    <li><a {{^duration}} style="pointer-events:none;color:lightgray" {{/duration}} href="/tests/{{uuid}}/fullLog">Download Log</a></li>
+                                    
+                                    <hr>
+                                    <li><a {{^duration}} style="pointer-events:none;color:lightgray" {{/duration}} href="/tests/{{uuid}}/delete">Delete Record</a></li>
+                                    {{#developerMode}}
+                                            <li class=' '><a href="/developer/markAllPassing/{{uuid}}/">markAllPassing</a></li>    
+                                    {{/developerMode}}                                
+                                </ul>
+                            </div>
+                             <div style="    clear: both;
+                                    text-align: center;
+                                    margin-top: -2px;
+                                    display: block;
+                                    line-height: 13px;
+                                    font-size: 13px;
+                                    color:#AAA">
+                            {{failMessage}}
+                        </div>    
+                        </div>
+                       
+                    </div>
+                </div>
+                {{/results}}
+            
+         </div>
+        {{/results.length}}
+        
+        {{^results}}
+                    {{#configs.length}}
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>No Results!</strong> Run your configuration by clicking "test".
+                        </div>
+                    {{/configs.length}}
+        {{/results}}
+
+    
+    {{/owned}}
+    {{>footer}}
+</div>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+/*function drawProgress() {
+    $.getJSON("/tests/progress/json", function(data) {
+        for (var i in data) {
+            $("#progress_" + data[i].uuid + ".progress-bar").css("width", data[i].progress + "%")
+            $("#status_" + data[i].uuid).text(data[i].status)
+        }
+        //   if($(".progress").length !== data.length)
+        //       window.location.reload();
+        window.setTimeout(drawProgress, 3000)
+    });
+}*/
+//drawProgress();
+</script>

@@ -1,0 +1,89 @@
+
+{{{ nolayout }}}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+
+<style type="text/css">
+	
+	.passfail {
+        box-shadow: none;
+    background: hsla(193, 10%, 97%, 1);
+
+}
+  h2, h3{
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+}
+
+</style>
+
+
+
+
+<div class="container">
+	
+	
+	<h1 style="width:100%"><a href="/products/{{test.testOfProductUUID}}/">{{product.productName}} {{product.productVersion}} by {{product.companyName}} </a> <span style="float: right" >Status: <span id="test_status">{{test.state}}</span></span></h1>
+
+	<h4>Started on {{#parseTimestamp}}{{test.startTime}}{{/parseTimestamp}} for <a target="_blank" href="{{test.flags.endpoint}}">{{test.flags.endpoint}}</a></h4>
+	<div class="passfail row">
+		<div class="col-md-6" style="text-align: center;">
+			<div style="font-size: 10em;">
+				{{test.summary.passed}}
+			</div>
+			<div  style="font-size: 3em;">
+				Passed
+			</div>
+		</div>
+		
+		<div class="col-md-6" style="text-align: center;">
+			<div style="font-size: 10em;">
+				{{test.summary.failed}}
+			</div>
+			<div  style="font-size: 3em;">
+				Failed
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<!-- Example row of columns -->
+	<h1>{{progress}}% Complete</h1>
+	<div class="progress">
+		<div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}"
+			aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
+			<span class="sr-only">{{progress}}% Complete</span>
+		</div>
+	</div>
+	{{^running}}
+		<h3>Completed in {{duration}} seconds.</h3>
+	{{/running}}
+	<br>
+
+	<h2>Failure Summary</h2>
+
+	{{#test.log.error}}
+		<p class='suite-item failed'>During LRS configuration validation:<br/>
+			<span class='errorMsg'>{{#parseError}}{{test.log.error}}{{/parseError}}</span>
+		</p>
+	{{/test.log.error}}
+
+	{{#failedTests.tests}}
+		{{> suite-node}}
+	{{/failedTests.tests}}
+	{{^failedTests.tests}}
+		<p class='suite-item passed'><br/> No failures {{#running}} so far.{{/running}}</p>
+	{{/failedTests.tests}}
+	<br>
+   
+	{{^running}}
+		<h2>Test Results</h2>
+
+		{{#test.log.tests}}
+			{{> suite-node}}
+		{{/test.log.tests}}
+
+	{{/running}}
+	<hr> 
+</div>
+<!-- /container -->

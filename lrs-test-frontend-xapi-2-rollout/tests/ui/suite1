@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="basic_flows.html">createAccount</a></td></tr>
+<tr><td><a href="Admin_verify_account.html">Admin verify account</a></td></tr>
+<tr><td><a href="loginNewUser.html">loginNewUser</a></td></tr>
+<tr><td><a href="createProduct.html">createProduct</a></td></tr>
+<tr><td><a href="newConfiguration.html">newConfiguration</a></td></tr>
+<tr><td><a href="runNewConfig.html">RunNewConfig</a></td></tr>
+<tr><td><a href="clearConformance.html">clearConformance</a></td></tr>
+<tr><td><a href="deleteLog.html">deleteLog</a></td></tr>
+<tr><td><a href="editConfiguration.html">editConfiguration</a></td></tr>
+<tr><td><a href="advancedTest.html">Advanced Test</a></td></tr>
+<tr><td><a href="rerunAdvanced.html">rerunAdvanced</a></td></tr>
+<tr><td><a href="CancelTest.html">Cancel test</a></td></tr>
+<tr><td><a href="FixConfig.html">Fix Config</a></td></tr>
+<tr><td><a href="deleteProduct.html">deleteProduct</a></td></tr>
+<tr><td><a href="deleteAccount.html">deleteAccount</a></td></tr>
+</tbody></table>
+</body>
+</html>

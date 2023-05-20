@@ -1,0 +1,37 @@
+{{#oneOrTheOther}}
+
+	<details class='suite-item'>
+		<summary class='{{status}}'>(<strong>{{status}}</strong>) {{{generateDescription}}}</summary>
+		<a class="retest" href='/tests/new/' name='{{name}}' uuid='{{test.lrsSettingsUUID}}'>Retest only these requirements</a>
+		{{#tests}}
+			{{> suite-node}}
+		{{/tests}}
+	</details>
+
+	{{selector}}
+
+	<ul class='suite-item suite-item-leaf {{status}}'>
+		
+		
+		{{#error}}<details>{{/error}}
+		<{{#error}}summary{{/error}}{{^error}}li{{/error}} class='{{status}}'> (<strong>{{status}}</strong>)  {{{generateDescription}}} </{{#error}}summary{{/error}}{{^error}}li{{/error}}>
+			{{#error}}
+				<br/>
+				<span class='errorMsg'>{{#parseError}}{{error}}{{/parseError}}</span>
+				
+			{{#log}}
+				<br/>
+				<pre class='errorMsg'>{{log}}</pre>
+			{{/log}}
+			{{/error}}
+		{{#error}}</details>{{/error}}
+		
+
+		
+		
+
+
+		
+	</ul>
+
+{{/oneOrTheOther}}

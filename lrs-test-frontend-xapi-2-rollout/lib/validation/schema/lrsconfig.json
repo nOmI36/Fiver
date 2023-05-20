@@ -1,0 +1,48 @@
+{
+	"title": "testConfig",
+	"type": "object",
+	"properties": {
+		"endpoint": {
+			"type": "string",
+			"format": "uri"
+		},
+		"name": {
+			"type": "string",
+			"minLength":3,
+			"maxLength":256
+		},
+		"authUser": {
+			"type": "string"
+		},
+		"authPass": {
+			"type": "string"
+		},
+		"consumer_secret": {
+			"type": "string"
+		},
+		"consumer_key": {
+			"type": "string"
+		},
+		"auth_token_path": {
+			"type": "string"
+		},
+		"authorization_path": {
+			"type": "string"
+		},
+		"request_token_path": {
+			"type": "string"
+		},
+		"authType": {
+			"type": "string",
+			"pattern":"(^basic$)|(^OAuth$)"
+		},
+		"associatedProduct": {
+			"type": "string"
+		},
+		"xapiVersion": {
+			"type": "string"
+		}
+	},
+	"additionalProperties": false,
+	"required": ["endpoint","name","authType","associatedProduct","consumer_key"]
+}

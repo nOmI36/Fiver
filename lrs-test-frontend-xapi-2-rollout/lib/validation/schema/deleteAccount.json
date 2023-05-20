@@ -1,0 +1,8 @@
+{
+	"title": "deleteAccount",
+	"type": "object",
+	"properties": {
+	},
+	"additionalProperties": false,
+	"required": []
+}

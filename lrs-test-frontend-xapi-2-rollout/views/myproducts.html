@@ -1,0 +1,99 @@
+{{>header}}
+<style type="text/css">
+    .col-md-2
+    {
+        font-weight: bolder;
+        font-size: 1.2em;
+        
+    }
+    .productrow
+    {
+        vertical-align: middle;
+        text-align: center;
+    }
+      .key
+    {
+        background: #CCC;
+        padding:2em 0em;
+    }
+</style>
+<div class="container" style="margin-top:2em"></div>
+<div class="container">
+    <!-- Example row of columns -->
+    {{#mode.my}}
+    <div class='row'>
+    <a href = "/products/create/" ><button type="button" class=" btn btn-raised btn-primary">New Product</button></a>
+    </div>
+    {{/mode.my}}
+    <br>
+    <div class='row productrow key'>
+        <div class='col-md-2'>
+            Logo
+        </div>
+        <div class='col-md-2'>
+            Product Name
+        </div>  
+        <div class='col-md-2'>
+            Product Version
+        </div>
+        <div class='col-md-2'>
+            Company Name
+        </div>
+        <div class='col-md-2'>
+            Publicly Listed
+        </div>
+        <div class='col-md-2'>
+            Actions
+        </div>
+    </div>
+    <hr>
+    {{#products}}
+    <div class='row productrow'>
+        <div class='col-md-2'>
+            <img style="    height: 100px;max-width: 300px;" src="/products/{{uuid}}/logo" >
+        </div>
+        <div class='col-md-2'>
+            {{productName}}
+        </div>  
+        <div class='col-md-2'>
+            {{productVersion}}
+        </div>
+        <div class='col-md-2'>
+            {{companyName}}
+        </div>
+        <div class='col-md-2'>
+            {{#associatedResult}}<a href="/tests/{{associatedResult}}/status">Yes. View Linked Log</a>{{/associatedResult}}
+            {{^associatedResult}}No{{/associatedResult}}
+        </div>
+        <div class='col-md-2 nav navbar' style="background:none">
+            <div class="btn-group">
+                        
+                        <a type="button" class="btn btn-raised btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage <span class="caret"></span>
+                        </a>
+                        
+                        <ul class="dropdown-menu">
+                            <li class='visible-lg ' ><a href="/products/{{uuid}}/">Details</a></li>
+                            <li class='visible-lg ' ><a href="/products/{{uuid}}/edit/">Edit</a></li>
+                            <li class='visible-lg ' ><a href="/products/{{uuid}}/setLogo/">Upload Logo</a></li>
+                            <li class='visible-lg ' ><a href="/products/{{uuid}}/associate/">Associate Test Results</a></li>
+                            {{#associatedResult}}<li class='visible-lg ' ><a href="/products/{{uuid}}/certificate/">Download Certificate</a></li>{{/associatedResult}}
+                            <hr>
+                            <li class='visible-lg ' ><a href="/products/{{uuid}}/delete">Delete</a></li>
+                        </ul>
+                       
+                    </div>
+        </div>
+    </div>
+      <hr>
+    {{/products}}
+
+   
+    
+     {{>footer}}
+</div>
+<script type="text/javascript">
+
+
+
+</script>

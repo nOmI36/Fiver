@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:3000/" />
+<title>createAccount</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">createAccount</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Create Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>test2@auto.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pass1</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pass2</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=email</td>
+	<td>test2@auto.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=pwd</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='feedback']/span[3]</td>
+	<td>exact:This account's email address is not validated. Do you want to resend the validation email or enter the code manually?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=resend the validation email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=#email</td>
+	<td>test2@test.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Enter it here.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=code</td>
+	<td>asdf</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=feedback</td>
+	<td>exact:Error: This verification code is invalid. Do you want to resend the validation email?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=LRS Test</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

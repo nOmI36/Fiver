@@ -1,0 +1,14 @@
+{
+	"title": "verifySig",
+	"type": "object",
+	"properties": {
+		"jwt": {
+			"type": "string"
+		},
+		"pubkey": {
+			"type": "string"
+		}
+	},
+	"additionalProperties": false,
+	"required": ["jwt","pubkey"]
+}

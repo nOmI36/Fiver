@@ -1,0 +1,176 @@
+
+  <!-- BEGAIN PRELOADER -->
+  <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div>
+  <!-- END PRELOADER -->
+ <style type="text/css">
+     
+
+element.style {
+}
+
+
+
+ </style>
+  <!-- START HEADER SECTION -->
+  <header id="headerArea">
+    <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="slider_area">           
+          <div class="menuarea"> 
+          {{>header}}
+
+          </div>
+          <div class='row adlHeader' ></div>
+
+          <ul id="demo1" class="slides">
+            <li>
+              
+              <!--Slider Description example-->
+              <div class="slide-desc">
+                <div class="slide_descleft">
+                  <img src="static/AppStation/img/mobileapp_img.png" alt="img">
+                </div>
+                <div class="slide_descright">
+                  <h1>1300 Tests</h1>
+<<<<<<< HEAD
+                  <p>The LRS Test Suite contains more than 1300 tests of LRS functionality. These tests cover every aspect of the xAPI Specificiation to guarentee interoperability.</p>
+=======
+                  <p>The LRS Test Suite contains more than a thousand individual tests of LRS functionality. These tests cover every aspect of the xAPI Specificiation to guarentee interoperability.</p>
+>>>>>>> d186bf6e0ce2b6ac979c489b23c16f11756fd3ae
+                 
+                </div>
+              </div>
+            </li>
+            <li style="display: none;">
+              
+              <!--Slider Description example-->
+              <div class="slide-desc">
+                <div class="slide_descleft">
+                  <img src="static/AppStation/img/mobileapp_img.png" alt="img">
+                </div>
+                <div class="slide_descright">
+                  <h1>OAuth or Basic Authentication</h1>
+                  <p>The test suite can be configured to use HTTP or HTTPS with Basic or OAuth authentication.</p>
+                </div>
+              </div>
+            </li>
+             <li style="display: none;">
+             
+              <!--Slider Description example-->
+              <div class="slide-desc">
+                <div class="slide_descleft">
+                  <img src="static/AppStation/img/mobileapp_img.png" alt="img">
+                </div>
+                <div class="slide_descright">
+                  <h1>Deep Logging</h1>
+                  <p>Export human or machine readable log files. You can even get a log of the full HTTP traffic that passes between the test server and your LRS.</p>
+                </div>
+              </div>
+            </li>
+            <li style="display: none;">
+              
+              <div class="slide-desc">
+                <div class="slide_descleft">
+                 <img src="static/AppStation/img/mobileapp_img.png" alt="img">
+                </div>
+                <div class="slide_descright">
+                 <h1>Conformance Certificates</h1>
+                  <p>Owners of products with passing test results can request a conformance certificate. This certificate can be downloaded from the product page and presented to prove your product supports the spec. </p>
+                 
+                </div>
+              </div>                 
+            </li>       
+            <li style="display: none;">
+              
+              <div class="slide-desc">
+               <div class="slide_descleft">
+                 <img src="static/AppStation/img/mobileapp_img.png" alt="img">
+               </div>
+               <div class="slide_descright">
+                  <h1>Learn about xAPI</h1>
+                  <p>The eXperience API is an industry standard for learning data interoperability. ADL maintains a large list of resources to help users and vendors leverage this specification.</p>
+                   <div class="header_btnarea">
+                    <a href="https://github.com/adlnet/xapi-spec/" class="learnmore_btn">Learn More</a>
+                    
+                  </div>
+               </div>
+              </div>               
+            </li>
+          </ul>           
+        </div>
+      </div>  
+    </div>      
+  </header>
+  <!-- END HEADER SECTION -->
+
+  <!-- START FEATURES SECTION -->
+  <section id="featuresSection">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="features_ara">
+            <h1>LRS Specification Testing</h1>
+            <p> The LRS Test Suite runs thousands of test against your LRS. You can use this site to prove that your product meets the specification, or to verify that your onsite installation is working properly. </p>
+            
+           </div>
+        </div>
+      </div>
+    </div>  
+   <!-- START FEATURES PRODUCT AREA -->
+
+
+
+
+    <!-- START FEATURES PRODUCT AREA -->
+    <div class="features_productarea sample_appparea">
+      
+     
+      <!-- START APP DOWNLOAD AREA -->
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="appdownload_area">
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <div class="appdownload">
+                    <p><span>Sign up to start testing.</span>Once you have an account, you can start configuring the test suite to run against your product.</p>
+                    <a class="download_btn appdown_btn" href="/users/create">Sign up.</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>     
+  </section>
+
+
+
+  <!-- END VIDEO SECTION -->
+
+  <!-- START TESTIMONIAL SECTIN -->
+ 
+
+  <!-- END CONTACT SECTION -->
+
+  <!-- START FOOTER SECTION -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="footer_area">
+            
+Copyright 2015 ADLnet.gov | All Rights Reserved | Sponsored by the Office of the Under Secretary of Defense for Personnel and Readiness (OUSD P&R) This is an official website of the U.S. Government © Advanced Distributed Learning
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END FOOTER SECTION -->
+
+  <!-- JQuery Files -->
+
+
+  

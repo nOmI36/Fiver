@@ -1,0 +1,47 @@
+.binary, .code
+{
+	font-family: monospace;
+	font-size: 9pt;
+
+	background-color: whitesmoke;
+	border: solid lightgrey 1px;
+	border-radius: 3px;
+	padding: 9.5px;
+}
+
+.binary > :first-child
+{
+	width: 64ch;
+	word-break: break-all;
+}
+
+.code > :first-child
+{
+	width:80ch;
+	word-break: break-all;
+}
+
+textarea.binary
+{
+	width: 64ch;
+	height: 200px;
+	padding-right: 16ch;
+	box-sizing: content-box;
+	word-break: break-all;
+}
+
+textarea.code {
+	width: 80ch;
+	height: 200px;
+	word-break: break-all;
+}
+
+.statusValid
+{
+	color: green;
+}
+
+.statusInvalid
+{
+	color: red;
+}

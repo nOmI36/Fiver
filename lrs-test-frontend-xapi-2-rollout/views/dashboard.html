@@ -1,0 +1,259 @@
+{{>header}}
+<style type="text/css">
+	.product
+	{
+    border: 1px solid #E4E4E4;
+    margin: 1em 0em;
+    border-radius: 5px;
+    padding: 1em;
+    /* box-shadow: 3px 5px 10px #EAEAEA; */
+    background: #f9f9f9;
+	}
+	.product a img {
+	    margin: auto;
+	    display: block;
+	    object-fit: contain;
+	}
+	h3
+	{
+		    text-transform: capitalize;
+	}
+	h5
+	{
+		    margin-bottom: 0px;
+	}
+  .caps
+  {
+    text-transform: capitalize;
+  }
+	.productMajor
+	{
+		position: fixed;
+	    height: 500px;
+	    width: 800px;
+	    background: white;
+	    top: calc(50% - 250px);
+	    left: calc(50% - 400px);
+	    box-shadow: 10px 10px 10px #999;
+	    border: 1px solid #DDD;
+	    border-radius: 4px;
+	    padding:50px;
+	}
+	.popupback
+	{
+		background: rgba(0,0,0,.15);
+	    position: fixed;
+	    top: 0px;
+	    left: 0px;
+	    width: 100%;
+	    height: 100%;
+          z-index: 100;
+	}
+	.modal-close
+	{
+		    position: absolute;
+		    top: 0px;
+		    right: 5px;
+		    z-index: 1055;
+		    font-weight: 900;
+		    cursor: pointer;
+	}
+	.datahidden
+	{
+		display: none;
+	}
+   .testStatus
+    {
+       
+    }
+    .table>tbody>tr>td
+    {
+        border:none;
+    }
+</style>
+
+<div class='row adlHeaderColor'>
+</div>
+<div class='row adlHeader'>
+    <div class="col-md-12">
+        <h2 class="text-center">User Dashboard</h2>
+    </div>
+</div>
+<div class="container">
+    {{#runningtests.length}}
+    <!-- Example row of columns -->
+    <h1> Your Test Queue</h1>
+    <div class="row">
+
+    {{^runningtests.length}}
+        <h1>{{no_tests_string}}</h1>
+    {{/runningtests.length}}
+    {{#runningtests.length}}
+    <div class="container">
+        <table class="table ">
+            <tr style ="font-weight: bolder;">
+                <td class='' style="max-width:200px">Name</td>
+                <td class='' style="max-width:200px">Endpoint</td>
+                <td class='' style="max-width:200px">Product</td>
+                <td class='' style="max-width:200px">Progress</td>
+                <td class='visible-md  visible-lg' style="max-width:200px">Started</td>
+                
+            </tr>
+
+            {{#runningtests}}
+            <tr>
+                <td class='' style="max-width:200px;overflow:hidden" ><a href="/tests/{{uuid}}/status">{{name}}</a></td>
+                <td class='' style="max-width:200px;overflow:hidden" >{{flags.endpoint}}</td>
+                <td class='' style="max-width:200px;overflow:hidden" >
+                  <a href="/products/{{testOfProductUUID}}/">  
+                {{product.productName}}
+                </a>
+                </td>
+                <td class='' style="max-width:200px;overflow:hidden" >
+                    <span id= "status_{{uuid}}" class = "testStatus">{{state}}</span>
+                    <div class="progress">
+                        
+                        <div id= "progress_{{uuid}}" class="progress-bar" role="progressbar" aria-valuenow="{{finalProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{finalProgress}}%;">
+                            <span class="sr-only">{{finalProgress}} Complete</span>
+                        </div>
+                    </div>
+                </td>
+                <td class='visible-md  visible-lg' style="max-width:200px;overflow:hidden" >
+                    {{#startTime}}
+                    <span id="started_{{uuid}}" >{{#formatTimestamp}}{{startTime}}{{/formatTimestamp}}</span>
+                    {{/startTime}}
+                    {{^startTime}}
+                    <span id="started_{{uuid}}" >Not started</span>
+                    {{/startTime}}
+                </td>
+                
+            </tr>
+            {{/runningtests}}
+        </table>
+    </div>
+
+    {{/runningtests.length}}
+    {{/runningtests.length}}
+    <hr> 
+</div>
+</div>
+
+
+<script type="text/javascript">
+
+function drawProgress()
+{
+    $.getJSON("/tests/progress/json",function(data)
+    {
+        if(data.length !== {{runningtests.length}}) window.location.reload();
+        for(var i in data)
+        {
+            $("#progress_" + data[i].uuid+".progress-bar").css("width",data[i].progress +"%")
+            $("#status_" + data[i].uuid).text(data[i].status)
+            $("#started_" + data[i].uuid).text((new Date(data[i].startTime)).toLocaleString());
+        }
+     //   if($(".progress").length !== data.length)
+     //       window.location.reload();
+        window.setTimeout(drawProgress, 3000)
+    });
+}
+window.setTimeout(drawProgress, 3000);
+
+
+</script>
+<!-- /container -->
+
+<div class="container">
+    <!-- Example row of columns -->
+    {{#tests.length}}
+    <h1> Recent Test Results</h1>
+    
+
+    
+        <table class="table ">
+            <tr style ="font-weight: bolder;">
+                <td class='' style="max-width:200px">Name</td>
+                <td class='' style="max-width:200px">Product</td>
+                <td class='' style="max-width:200px">Progress</td>
+                <td class='visible-md visible-lg' style="max-width:200px">Started</td>
+                
+            </tr>
+
+            {{#tests}}
+            <tr>
+                <td class='' style="max-width:200px;overflow:hidden" ><a href="/tests/{{uuid}}/status">{{name}}</a></td>
+                
+                <td class='' style="max-width:200px;overflow:hidden" >
+                    <a href="/products/{{virtuals.product.uuid}}/">
+                    {{virtuals.product.productName}}
+                    </a>
+                </td>
+                <td class='' style="max-width:200px;overflow:hidden" >
+                    <span id= "status_{{uuid}}" class = "testStatus">{{state}}</span>
+                    <div class="progress">
+                        
+                        <div id= "progress_{{uuid}}" class="progress-bar" role="progressbar" aria-valuenow="{{finalProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{finalProgress}}%;">
+                            <span class="sr-only">{{finalProgress}} Complete</span>
+                        </div>
+                    </div>
+                </td>
+                <td class='visible-md  visible-lg' style="max-width:200px;overflow:hidden" >{{#formatTimestamp}}{{startTime}}{{/formatTimestamp}}</td>
+                
+            </tr>
+            {{/tests}}
+        </table>
+    
+    
+   
+    {{/tests.length}}
+    <hr> 
+</div>
+
+<div class="container">
+    <h1> Recently Updated Products</h1>
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-3">
+            <a href="/products/create/" class="btn btn-raised btn-primary">New Product </a>
+        </div>
+    </div>            
+    {{^products}}
+        <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>No Products!</strong> Click the button above to create your first product.
+        </div>
+    {{/products}}
+    <div class="row">
+    	{{#products}}
+    		<div class="col-md-3">
+    			<a href="products/{{uuid}}/" >
+                <div class="product" >
+	    			<div class="datahidden">
+	    				{
+	    					"owner": "{{owner}}",
+							  "productVersion": "{{productVersion}}",
+							  "website": "{{website}}",
+							  "companyName": "{{companyName}}",
+							  "productName": "{{productName}}",
+							  "contactEmail": "{{contactEmail}}",
+							  "contactName": "{{contactName}}",
+							  "contactPhone": "{{contactPhone}}",
+							  "uuid": "{{uuid}}",
+                              "associatedResult":"{{associatedResult}}"
+	    				}
+	    			</div>
+    				 <img style="    height: 150px;max-width: 230px;" src="/products/{{uuid}}/logo" ><br>
+    				<h3> {{productName}} </h3>
+    				
+    				<h5 class="caps"> {{companyName}} </h5>
+    				
+    			</div>
+                </a>
+    		</div>
+    	{{/products}}
+
+    </div>
+    <hr>
+    {{>footer}}
+</div>
+

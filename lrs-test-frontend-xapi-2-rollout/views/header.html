@@ -1,0 +1,92 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <a class="navbar-brand logo visible-md visible-lg" href="https://www.adlnet.gov/"><img src="/static/img/adl-gray-standard.png"></a>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" style="    overflow-x: hidden;" id="navbar">
+            <ul class="visible-sm visible-md visible-lg nav navbar-nav custom_nav ">
+
+            <li class="visible-sm visible-md visible-lg">
+
+                        <div class="social-networks-menuitem">
+    <a class="fa fa-facebook" style="color:#585c5f;" target="_blank" href="https://www.facebook.com/ADL-Advanced-Distributed-Learning-Initiative-894140680670107/" data-placement="bottom" data-title="" data-toggle="tooltip" title="" data-original-title="Facebook"></a>
+    <a class="fa fa-twitter" style="color:#585c5f;" target="_blank" href="https://twitter.com/ADL_Initiative" data-placement="bottom" data-title="" data-toggle="tooltip" title="" data-original-title="Twitter"></a>
+    <a class="fa fa-youtube" style="color:#585c5f;" target="_blank" href="https://www.youtube.com/user/ADLInitiative" data-placement="bottom" data-title="" data-toggle="tooltip" title="" data-original-title="Youtube"></a>
+    <a class="fa fa-google" style="color:#585c5f;" target="_blank" href="https://www.google.com/+ADLCoLab" data-placement="bottom" data-title="" data-toggle="tooltip" title="" data-original-title="Google+"></a>
+    <a class="fa fa-envelope-open-o" style="color:#585c5f;" target="_self" href="mailto:adlhelpdesk@adlnet.gov" data-enc-email="" data-placement="bottom" data-title="" data-toggle="tooltip" title="" data-original-title="Email"></a>
+</div>
+
+
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav custom_nav navbar-right">
+
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+             <li><a href="/verify">Verify Certificate</a></li>
+
+
+                {{#user}}
+
+
+                     <li class="visible-xs"><a href="/users/logout">Logout</a></li>
+                     <hr class="visible-xs">
+                     <li class="visible-xs"><a href="/">Home</a></li>
+                     <hr class="visible-xs">
+                     <li class="visible-xs"><a href="/users/resetPassword">Reset Password</a></li>
+                     <li class="visible-xs"><a href="/users/deleteAccount">Delete Account</a></li>
+                     {{#isAdmin}}
+                        <hr class="visible-xs">
+                        <li class="visible-xs"><a href="/admin/users">Manage Users</a></li>
+                        <li class="visible-xs"><a href="/admin/products">Manage Products</a></li>
+                        <li class="visible-xs"><a href="/admin/queue">Manage Queue</a></li>
+                     {{/isAdmin}}
+
+            {{/user}}
+            {{^user}}
+
+                     <li class="visible-xs"><a href="/users/login?r={{requrl}}">Login</a></li>
+                     <li class="visible-xs"><a href="/users/create">Create Account</a></li>
+
+            {{/user}}
+            {{#user}}
+
+              <li class="nav navbar-nav dropdown navbar-right visible-md visible-lg visible-sm">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/users/logout">Logout</a></li>
+                    <hr>
+                     <li><a href="/">Home</a></li>
+                     <hr>
+                     <li><a href="/users/resetPassword">Reset Password</a></li>
+                     <li><a href="/users/deleteAccount">Delete Account</a></li>
+                     {{#isAdmin}}
+                        <hr>
+                        <li><a href="/admin/users">Manage Users</a></li>
+                        <li><a href="/admin/products">Manage Products</a></li>
+                        <li><a href="/admin/queue">Manage Queue</a></li>
+                     {{/isAdmin}}
+                </ul>
+            </li>
+            {{/user}}
+            {{^user}}
+            <li class="dropdown visible-md visible-sm visible-lg">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/users/login?r={{requrl}}">Login</a></li>
+                    <li><a href="/users/create">Create Account</a></li>
+                </ul>
+            </li>
+            {{/user}}
+            </ul>
+        </div>
+    </div>
+</nav>

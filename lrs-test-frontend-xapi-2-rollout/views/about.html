@@ -1,0 +1,100 @@
+{{>header}}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class='row adlHeaderColor'>
+</div>
+<div class='row adlHeader'>
+    <div class="col-md-12">
+        <h2 class="text-center">About</h2>
+    </div>
+</div>
+<div class="container" style="margin-top:3em">
+    <!-- Example row of columns -->
+    <div class='row' >
+      <p>
+        This web application is the official ADL LRS Test Suite. The Test Suite evaluates whether an LRS correctly implements the mandatory xAPI server-side requirements by automating HTTP requests to an LRS and evaluating its responses. The Test Suite evaluates over 1300 LRS <a href="https://adl.gitbooks.io/xapi-lrs-conformance-requirements/content/">testing requirements</a>, which were derived from the <a href="https://github.com/adlnet/xAPI-Spec">xAPI specification</a> as well as community input from the <a href="https://github.com/adlnet/xapi-lrs-conformance-requirements">Policies and Procedures for Conformance Testing Group</a>.
+      </p>
+
+      <p>
+        At the end of a successful test, the Test Suite creates an authoritative certificate verifying conformance. This allows organizations that are developing or acquiring an LRS to ensure it fully adheres to the <a href="https://github.com/adlnet/xAPI-Spec">xAPI specification</a>, which aids developers, DoD and Federal agencies, and the broader community as they seek to implement xAPI-conformant systems.
+      </p>
+
+      <h2>Submitting Issues or Questions</h2>
+      <p>
+        The Test Suite team use the GitHub <a href="https://github.com/adlnet/lrs-conformance-test-suite/issues">issues list</a> for the lrs-conformance-test-suite project to collect any issues or questions about the LRS Test Suite and the <a href="https://adopters.adlnet.gov">xAPI Adopters Registry</a>. This keeps all issues in one place, provides access to a public archive of historical data, and allows the community to comment and help answer issues.
+      </p>
+
+      <h2>Software Updates Schedule</h2>
+      <p>
+        We use a consistent release schedule to allow LRS developers to plan and prepare for additional LRS testing. This schedule will be on a monthly basis.
+      </p>
+
+      <p><strong>The Test Suite team will follow the update schedule described below:</strong></p>
+
+      <ol>
+        <li>On the 1st Wednesday of each month, the Test Suite team will stop adding new patches to the <a href="https://github.com/adlnet/lrs-conformance-test-suite/tree/staged">‘staged’ branch</a>.
+          <ol type='a'>
+            <li>If there are no staged fixes by the 1st Wednesday of the month, there will be no software update for the current month.</li>
+          </ol>
+        </li>
+        <li>Next, the Test Suite team will test the software and take community feedback over a review period of one week.</li>
+        <li>On the 2nd Wednesday of the month, the Test Suite team will merge ‘staged’ to ‘master' and push the changes to the <a href="https://lrstest.adlnet.gov">LRS Test Suite production environment</a>.</li>
+      </ol>
+
+      <h2>Bug Fix Process</h2>
+      <p>
+        Any issues found to be bugs in the user interface or the web application that do not impact testing and conformance will be patched and released to the public as they are fixed.
+      </p>
+
+      <p>
+        Any issues found to be bugs in a test case or in the testing software that may impact conformance, will follow the fix and release process outlined below:
+      </p>
+
+      <ol>
+        <li>
+          Issues will be reviewed by the Test Suite team.
+          <ol type='a'>
+            <li>
+              Issues determined to be obvious bugs - wrong expected error code, etc - will be tasked out to team members to fix.
+            </li>
+            <li>
+              Issues that do not have a clear or obvious fix will be brought up to the LRS Testing Group for a recommended resolution and consensus, then tasked out to team members to fix.
+            </li>
+          </ol>
+        </li>
+        <li>
+          When issues are fixed the changes will be merged into the <a href="https://github.com/adlnet/lrs-conformance-test-suite/tree/staged">‘staged’ branch</a> of the lrs-conformance-test-suite project and the issue will be tagged as ‘staged’.
+        </li>
+        <li>
+          Once the changes are merged into ‘master’, the issues will be closed.
+        </li>
+      </ol>
+
+      <h2>LRS Testing Group</h2>
+      <p>
+        The LRS Testing Group will continue to <a href="https://attendee.gotowebinar.com/register/773091841846868659">meet every 2nd Wednesday</a> of the month to resolve any  issues, to discuss the inclusion or removal of any tests, and to discuss upcoming LRS Test Suite updates. The LRS Testing Group will also be leveraged for recommendations to the software update and bug fix processes.
+      </p>
+
+      <h2>FAQ</h2>
+      <p>
+        <strong>In the past, the Test Suite didn't issue certificates, does this one? </strong><br>
+        Yes it does. The previous versions were beta and release candidate versions. This version is the final version and does issue official certificates.
+      </p>
+      <p>
+        <strong>I passed the Test Suite, why am I not listed in the Conformant LRSs? </strong><br>
+        You’ll have to self-register and upload your certificate.  There is a human-in-the-loop step here to make sure no one asserts on your behalf or uses obviously inaccurate information.  Registration in the conformant LRS list is not done automatically as there are use cases where organizations may not want to openly advertise their product.
+      </p>
+      <p>
+        <strong>When will I have to wait for verification/ADL responses? </strong><br>
+        You’ll have to wait for verification for your LRS Conformance Test Account, xAPI Adopter Account (also used to post Conformant products), and when you’d like a passing Conformance Test to issue a cert.
+      </p>
+
+    </div>
+</div>
+
+<div class='row'>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        {{>footer}}
+    </div>
+    <div class="col-md-2"></div>
+</div>
